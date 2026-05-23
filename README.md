@@ -2,6 +2,7 @@
 
 A full-stack inventory reservation system built using Next.js, Prisma, and Supabase for managing multi-warehouse ecommerce inventory.
 
+<<<<<<< HEAD
 The system prevents overselling during checkout by introducing temporary inventory reservations with expiry handling. Customers can reserve inventory during payment flow, confirm purchases, or release reservations if payment fails.
 
 ---
@@ -37,6 +38,25 @@ https://github.com/Karthik2003B/allo-inventory-system
 - Reservation cancellation
 - Reservation expiry handling
 - Live countdown timer
+=======
+The system prevents overselling during checkout by introducing temporary inventory reservations with expiry handling.
+
+---
+
+## Features
+
+- Multi-warehouse inventory tracking
+- Product availability calculation
+- Reservation-based checkout flow
+- Reservation confirmation and cancellation
+- Automatic reservation expiry cleanup
+- Live reservation countdown timer
+- Transaction-safe reservation handling
+- Out-of-stock handling
+- Reservation status tracking
+
+---
+>>>>>>> Fix production build and deployment issues
 
 ## Concurrency Safety
 
@@ -56,8 +76,11 @@ https://github.com/Karthik2003B/allo-inventory-system
 
 # Tech Stack
 
+<<<<<<< HEAD
 ## Frontend
 
+=======
+>>>>>>> Fix production build and deployment issues
 - Next.js 16
 - TypeScript
 - Tailwind CSS
@@ -68,6 +91,7 @@ https://github.com/Karthik2003B/allo-inventory-system
 - Prisma ORM
 - Supabase PostgreSQL
 
+<<<<<<< HEAD
 ## Database
 
 - PostgreSQL (Supabase)
@@ -243,9 +267,72 @@ git clone https://github.com/Karthik2003B/allo-inventory-system.git
 ---
 
 ## 2. Install Dependencies
+=======
+---
 
-```bash
+## Inventory Model
+
+Each inventory record tracks:
+
+- totalQuantity
+- reservedQuantity
+
+Available stock is computed dynamically as:
+
+```text
+availableQuantity = totalQuantity - reservedQuantity
+
+Reservation Lifecycle
+
+Reservations move through the following states:
+
+* PENDING
+* CONFIRMED
+* RELEASED
+
+PENDING
+
+Inventory is temporarily reserved.
+
+CONFIRMED
+
+Inventory is permanently deducted after successful purchase.
+
+RELEASED
+
+Reserved inventory is returned back to available stock.
+
+⸻
+
+Concurrency Safety
+
+Reservation creation uses Prisma transactions to ensure:
+
+* inventory validation
+* stock reservation
+* reservation creation
+
+occur atomically.
+
+This prevents inconsistent inventory updates during concurrent reservation attempts.
+
+⸻
+
+Reservation Expiry Strategy
+
+Expired reservations are cleaned using a lazy cleanup approach.
+
+Whenever products are fetched, expired pending reservations are automatically released and inventory is restored.
+
+⸻
+
+Local Setup
+
+Install dependencies:
+>>>>>>> Fix production build and deployment issues
+
 npm install
+<<<<<<< HEAD
 ```
 
 ---
@@ -363,3 +450,27 @@ This project demonstrates:
 # Author
 
 Karthik B
+=======
+
+Run development server:
+
+npm run dev
+
+API Endpoints
+
+GET /api/products
+
+Returns products with warehouse inventory availability.
+
+POST /api/reservations
+
+Creates inventory reservation.
+
+POST /api/reservations/:id/confirm
+
+Confirms reservation and permanently deducts inventory.
+
+POST /api/reservations/:id/release
+
+Releases reserved inventory.
+>>>>>>> Fix production build and deployment issues
