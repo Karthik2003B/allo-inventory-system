@@ -17,7 +17,7 @@ https://your-vercel-url.vercel.app
 GitHub Repository:
 
 ```text
-https://github.com/YOUR_USERNAME/allo-inventory-system
+https://github.com/Karthik2003B/allo-inventory-system
 ```
 
 ---
